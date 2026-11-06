@@ -1,117 +1,144 @@
-# 🌱 AgriPulse AI — Agricultural Market Intelligence
+# 🌾 AgriPulse AI – 14-Day Price Volatility Forecasting
 
-AgriPulse AI is an AI-powered agricultural market intelligence platform designed to help farmers and market stakeholders understand price volatility in agricultural commodities. It combines historical market prices, mandi arrivals, rainfall patterns, and seasonal indicators to provide data-driven insights into changing market conditions.
+An AI-powered agricultural market intelligence platform designed to forecast short-term price volatility in Tur Dal (Pigeon Pea) using market and weather-related indicators.
 
-The current implementation focuses on **Tur Dal (Pigeon Pea) at Mumbai APMC**, with a 14-day price volatility forecast, risk classification, and interactive market insights.
+AgriPulse AI helps users understand potential price fluctuations, assess market risk and make more informed agricultural market decisions through data-driven forecasting.
 
-## ✨ Features
+## 🚀 Project Overview
 
-- **14-Day Volatility Forecast:** Estimates upcoming Tur Dal price volatility to help users understand potential market fluctuations.
-- **AI/ML-Powered Prediction:** Integrates a trained machine learning model with market and weather-related features.
-- **Risk Classification:** Categorizes estimated volatility into risk levels to make predictions easier to interpret.
-- **Scenario Simulator:** Allows users to adjust market price, mandi arrivals, rainfall, and monsoon deficit inputs to explore different market conditions.
-- **Maharashtra Market Map:** Provides an interactive view of agricultural market information.
-- **Market Trends:** Explore price movements, mandi arrivals, and historical patterns.
-- **Rainfall Insights:** Examine rainfall and monsoon-deficit information in the context of agricultural markets.
-- **Historical Data:** Access historical market data and available filters.
-- **Interactive Dashboard:** Presents key metrics and market insights in a consolidated interface.
+Agricultural commodity prices are influenced by several factors, including mandi arrivals, rainfall patterns, seasonal variations and market demand.
 
-## 🧠 Machine Learning Approach
+AgriPulse AI combines historical market information and environmental indicators to generate a 14-day price volatility forecast and classify the expected market risk.
 
-The prediction workflow uses historical agricultural market data and engineered features to estimate price volatility.
+## ✨ Key Features
 
-### Data and Features
+- **14-Day Forecasting:** Predicts expected price volatility over the next 14 days.
+- **AI/ML Forecasting Engine:** Uses a trained CatBoost-based model for volatility prediction.
+- **Risk Classification:** Categorizes market conditions into Low, Moderate, High and Very High risk.
+- **Market Indicators:** Incorporates spot price, daily mandi arrivals, rainfall and monsoon deficit.
+- **Interactive Dashboard:** Visualizes predicted volatility, market risk and forecast trends.
+- **Custom Scenario Inputs:** Allows users to experiment with different market conditions.
+- **Market Selection:** Supports the Mumbai APMC market context.
+- **Multilingual Interface:** Includes language selection for a more accessible experience.
 
-The model development workflow uses historical information from 2021–2024, including:
+## 🧠 How It Works
 
-- Historical market prices
-- Mandi arrivals
-- Rainfall information
-- Price lags and recent volatility
-- Seasonal and monsoon-related indicators
-
-### Model Development
-
-Multiple regression models were evaluated during development, including:
-
-- Linear Regression
-- Random Forest
-- XGBoost
-- CatBoost
-
-CatBoost was selected for the implemented model based on the development evaluation, particularly its Mean Absolute Error (MAE). Model performance varies across evaluation metrics, and the results have limitations that should be considered when interpreting forecasts.
-
-**Important:** The forecast is an estimate of volatility, not a guaranteed future market price. Its reliability depends on the quality and availability of relevant input data.
+1. **Data Input:** Market and weather-related indicators are provided to the forecasting engine.
+2. **Data Processing:** Input values are processed for model prediction.
+3. **Model Inference:** The trained machine learning model generates a volatility forecast.
+4. **Risk Assessment:** Predicted volatility is mapped to a corresponding risk category.
+5. **Visualization:** Results are presented through an interactive dashboard.
 
 ## 🛠️ Technology Stack
 
-Update this section to match the technologies and dependencies actually used in your repository.
+| Category | Technologies |
+|---|---|
+| Frontend | React, TypeScript |
+| Build Tool | Vite |
+| Backend | Python, Node.js |
+| Machine Learning | CatBoost |
+| Data Processing | Python |
+| Data Format | CSV, JSON |
+| Version Control | Git, GitHub |
 
-- **Frontend:** Web-based interactive dashboard
-- **Programming Language:** Python for machine learning; other languages as used by the application
-- **Machine Learning:** CatBoost, with other models used during evaluation
-- **Data Processing:** Historical market, mandi-arrival, and rainfall data
-- **Visualization:** Interactive charts and market insights
+## 📊 Forecasting Inputs
 
-## 🚀 Getting Started
+| Parameter | Description |
+|---|---|
+| Modal Spot Price | Current commodity price (₹/qt) |
+| Daily Mandi Arrivals | Quantity arriving in the market |
+| 7-Day Rainfall Sum | Recent rainfall measurement |
+| Monsoon Deficit | Rainfall deviation from normal |
+
+## 📁 Project Structure
+
+```text
+Agripulse/
+│
+├── backend/
+│   └── ml_engine/
+│       ├── predict.py
+│       ├── generate_data.py
+│       ├── train_pipeline.py
+│       └── CatBoost model files
+│
+├── public/
+├── src/
+│   ├── components/
+│   └── App.tsx
+│
+├── .env.example
+├── .gitignore
+├── index.html
+├── package.json
+├── server.ts
+├── tsconfig.json
+├── vercel.json
+└── vite.config.ts
+```
+
+## ⚙️ Installation & Setup
 
 ### Prerequisites
 
-Install the tools required by the technologies in your project. Depending on your implementation, these may include Python, Node.js, and npm.
+- Node.js
+- npm
+- Python 3
+- Git
 
-### Installation
+### 1. Clone the repository
 
-1. Clone the repository:
+```bash
+git clone https://github.com/HeenalKacha/Agripulse.git
+```
 
-   ```bash
-   git clone <YOUR_GITHUB_REPOSITORY_URL>
-   ```
+### 2. Navigate to the project
 
-2. Navigate to the project directory:
+```bash
+cd Agripulse
+```
 
-   ```bash
-   cd <YOUR_PROJECT_FOLDER>
-   ```
+### 3. Install dependencies
 
-3. Install dependencies using the package manager and dependency files provided in the repository.
+```bash
+npm install
+```
 
-4. Configure any required environment variables using the project's environment-variable documentation. Do not commit API keys, credentials, or private configuration files.
+### 4. Configure environment variables
 
-5. Start the application using the development commands defined in your project configuration.
+Create your local `.env` file using `.env.example` as a reference. Add the required configuration values.
 
-Refer to the actual project files for the exact installation and startup commands.
+### 5. Start the application
 
-The inference server uses `python` on Windows and `python3` on other platforms by default. If Python is installed under a different executable name or path, set `PYTHON_EXECUTABLE` to that command before starting the server.
+```bash
+npm run dev
+```
 
-When deploying the frontend to Vercel, deploy the Express/Python inference server separately and set the Vercel environment variable `VITE_API_URL` to that backend's base URL (for example, `https://your-backend.example.com`). Redeploy the frontend after changing the variable. The backend must include the Python runtime, CatBoost dependency, model file, and dataset.
-
-## 📊 Current Scope and Limitations
-
-- The primary forecasting implementation focuses on Tur Dal at Mumbai APMC.
-- Historical model-development data covers 2021–2024.
-- Displaying a forecast for a future date does not mean that real market observations are available for that date.
-- Forecast quality depends on the accuracy and relevance of the input features.
-- Risk categories are indicators of estimated volatility, not financial or trading advice.
-
-## 🔮 Future Enhancements
-
-- Expand support to additional agricultural commodities and markets.
-- Integrate reliable, updated market and weather data sources.
-- Improve model evaluation and forecast reliability.
-- Add regional and seasonal comparisons.
-- Provide multilingual insights for broader accessibility.
+*Note: Configure the Python backend dependencies and start command according to the project's backend requirements.*
 
 ## 🎯 Project Objective
 
-AgriPulse AI aims to make agricultural market information easier to understand and use by translating historical market and weather patterns into accessible volatility forecasts and risk insights.
+The primary objective of AgriPulse AI is to explore how machine learning can support agricultural market intelligence by identifying potential price volatility and providing understandable risk insights.
 
-## 👩‍💻 Author
+## 🔮 Future Enhancements
+
+- Expand forecasting to multiple agricultural commodities.
+- Integrate real-time mandi price and weather APIs.
+- Support additional agricultural markets across India.
+- Improve forecasting through continuous model evaluation.
+- Introduce historical forecast accuracy analysis.
+- Develop personalized market alerts.
+
+## ⚠️ Disclaimer
+
+AgriPulse AI is an academic and experimental forecasting project. Predictions are estimates based on available data and model assumptions. They should not be treated as guaranteed market outcomes or financial advice.
+
+## 👩‍💻 Developer
 
 **Heenal Kacha**
 
-- GitHub: [HeenalKacha](https://github.com/HeenalKacha)
-- LinkedIn: [Heenal Kacha](https://linkedin.com/in/heenal-kacha-39528132b)
+GitHub: [@HeenalKacha](https://github.com/HeenalKacha)
 
 ---
 
-*AgriPulse AI — Turning agricultural data into actionable market insights.*
+⭐ If you find this project interesting, consider giving the repository a star!
